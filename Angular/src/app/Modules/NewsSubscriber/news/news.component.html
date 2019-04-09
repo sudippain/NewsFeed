@@ -1,0 +1,38 @@
+ 
+  <div class="topnav">
+    <a class="active"  [routerLink]="['/News']" ><i class="fa fa-newspaper-o" aria-hidden="true"></i> &nbsp;News</a>
+    <a id="userdetails" [routerLink]="['/UserDetails']"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;UserDetails</a>
+    <a id="usernewshistory" [routerLink]="['/UserNewsHistory']" ><i class="fa fa-history" aria-hidden="true"></i>&nbsp;SearchHistory</a>
+    <!-- <a style="float:right;background-color: red; margin: 3px white"href="#about">Logout</a> -->
+   <a style="float:right;cursor:pointer;background-color:crimson" (click)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Logout</a>
+    <div class="search-container">
+      <form class="formDesign" [formGroup]="userSearchForm"  (ngSubmit)="onSearch(userSearchForm.value)">
+        <input type="text" id="searchValue" formControlName="userNewsSearch" placeholder="Search.." name="search">
+        <button type="submit" id="searchButton" ><i class="fa fa-search"></i></button>
+      </form>
+    
+    </div>
+    
+    </div>
+    <br>
+
+
+
+
+<div class="container row col-md-10 mx-auto">
+    <div *ngFor="let article of mArticles" class="card col-md-5 mx-4 my-2">
+      <img class="card-img-top mb-2" style="height: 280px; width: auto;" src={{article.urlToImage}} alt="Image Not Found">
+      <h4 class="card-title" style="font-size: 20px;">{{article.title}}</h4>
+      <h5 class="card-subtitle mb-2 text-muted" style="font-size: 15px;">{{article.publishedAt | date}}</h5>
+      <hr>
+      <div class="card-body">
+        <p>
+          {{article.description}}
+        </p>
+      </div>
+      <a href={{article.url}} target="_blank" class="card-link ml-auto mb-2"><i class="fa fa-eye" style="font-size:18px">
+          Read
+          More...</i></a>
+    </div>
+  
+</div>

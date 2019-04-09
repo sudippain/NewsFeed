@@ -1,0 +1,43 @@
+<div class="topnav">
+
+  <a [routerLink]="['/News']" ><i class="fa fa-newspaper-o" aria-hidden="true"></i> &nbsp;News</a>
+  <a id="userdetails" [routerLink]="['/UserDetails']"  ><i class="fa fa-user" aria-hidden="true"></i>&nbsp;UserDetails</a>
+  <a id="usernewshistory" [routerLink]="['/UserNewsHistory']" class="active"><i class="fa fa-history" aria-hidden="true"></i>&nbsp;SearchHistory</a>
+  <!-- <a style="float:right;background-color: red; margin: 3px white"href="#about">Logout</a> -->
+ <a style="float:right;background-color:crimson"  (click)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Logout</a>
+  
+  
+  </div>
+  <br>
+<div class="container">
+    <div class="table-responsive" >
+
+
+        <table class="table" *ngIf="userHistoryList.length>0">
+            <thead class="thead-light">
+              <tr>
+               
+                <th scope="col">SI No</th>
+                <th scope="col">Search Item</th>
+                <th scope="col">Time & Date</th>
+                <th scope="col">Remove</th>
+               
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let userhistorylist of userHistoryList |  paginate: { itemsPerPage: 5, currentPage: p }">
+              
+                <td>{{userHistoryList.indexOf(userhistorylist)+1}}</td>
+                <td>{{userhistorylist.userNewsSearch}}</td>
+                <td>{{userhistorylist.serachTime | date :'MMM d, y, h:mm:ss a'}}</td>
+                <td><i (click)="removeItem(userhistorylist.userSearchId,userhistorylist.userNewsSearch)" id="remove" class="fa fa-trash" aria-hidden="true" style="font-size:24px;color:red;cursor: pointer;"></i></td>
+              
+              </tr>
+              <tr> <th colspan="6"><pagination-controls (pageChange)="p = $event"></pagination-controls></th>  </tr>
+          
+            </tbody>
+          </table>
+         <div  *ngIf="userHistoryList.length==0"><h3>No History</h3></div>
+</div>
+
+</div>
